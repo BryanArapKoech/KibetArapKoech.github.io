@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post - Brian Kibet</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://kit.fontawesome.com/56bf1872c9.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- 5. To add a new blog post:
+
+Open the posts.json file
+Add a new entry to the "posts" array with:
+
+A unique ID
+Title
+Date
+Excerpt (short summary)
+Content (full HTML content of your post)
+
+
+
+The dynamic blog system will automatically include your new post in the listing.
+This implementation keeps your website minimal and lightweight while making it much easier to manage blog content. -->
+    <!-- --------------------Nav Bar ------------------------------------>
+
+    <div id="header">
+        <nav>
+            <img src="/public/assets/images/profile_logo.jpeg" class="logo">
+            <ul id="sidemenu">
+                <li><a href="/index.html#header">Home</a></li>
+                <li><a href="/index.html#about">About</a></li>
+                <li><a href="/index.html#services">Services</a></li>
+                <li><a href="/index.html#my work">My Work</a></li>
+                <li><a href="/blog.html#blog">Blog</a></li>
+
+                <i class="fas fa-times close-icon" onclick="closemenu()"></i>
+            </ul>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
+        </nav>
+    </div>
+
+    <!-- Blog Post Content -->
+    <div id="blog">
+        <div class="container">
+            <div id="blog-content">
+                <!-- Blog post content will be loaded here dynamically -->
+                <div class="loading">Loading blog post...</div>
+            </div>
+
+            <a href="blog.html" class="back-to-blog">&larr; Back to Blog</a>
+        </div>
+    </div>
+
+    <footer>
+        <div id="copyright">
+            <div class="copyright">
+                <p style="text-align: center;">Copyright &copy;
+                    <script>document.write(new Date().getFullYear())</script> Brian Kibet. All Rights Reserved
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function openmenu() {
+            document.getElementById("sidemenu").style.right = "0";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closemenu() {
+            const menuWidth = window.innerWidth <= 380 ? "-180px" : "-250px";
+            document.getElementById("sidemenu").style.right = menuWidth;
+            document.body.style.overflow = "auto";
+        }
+
+        // Add event listeners for menu items
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuItems = document.querySelectorAll("#sidemenu li a");
+            menuItems.forEach(item => {
+                item.addEventListener("click", closemenu);
+            });
+
+            // Close menu on window resize if screen becomes larger
+            window.addEventListener("resize", function () {
+                if (window.innerWidth > 768) {
+                    closemenu();
+                }
+            });
+
+            // Load blog post content
+            loadBlogPost();
+        });
+
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Function to load blog post
+        function loadBlogPost() {
+            const postId = getUrlParameter('id');
+
+            if (!postId) {
+                document.getElementById('blog-content').innerHTML = `
+                    <h1 class="ctitle">Post Not Found</h1>
+                    <p>The blog post you're looking for could not be found.</p>
+                `;
+                return;
+            }
+
+            fetch('public/blog-posts/posts.json')
+        
+                .then(response => response.json())
+                .then(data => {
+                    const post = data.posts.find(p => p.id === postId);
+
+                    if (post) {
+                        displayBlogPost(post);
+                    } else {
+                        document.getElementById('blog-content').innerHTML = `
+                            <h1 class="ctitle">Post Not Found</h1>
+                            <p>The blog post you're looking for could not be found.</p>
+                        `;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading blog post:', error);
+                    document.getElementById('blog-content').innerHTML = '<p>Error loading blog post. Please try again later.</p>';
+                });
+        }
+
+        // Function to display blog post
+        function displayBlogPost(post) {
+            document.title = `${post.title} - Brian Kibet`;
+
+            const postDate = new Date(post.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            const blogContentElement = document.getElementById('blog-content');
+
+            // Create HTML for the post
+            blogContentElement.innerHTML = `
+                <div class="blog-header">
+                    <div class="blog-date">${postDate}</div>
+                    <h1 class="ctitle">${post.title}</h1>
+                </div>
+                
+                <div class="blog-content">
+                    ${post.content}
+                </div>
+            `;
+
+            // Apply syntax highlighting if you have a code highlighting library
+            if (window.hljs) {
+                document.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightBlock(block);
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brian Kibet - Blog</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://kit.fontawesome.com/56bf1872c9.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- 5. To add a new blog post:
+
+Open the posts.json file
+Add a new entry to the "posts" array with:
+
+A unique ID
+Title
+Date
+Excerpt (short summary)
+Content (full HTML content of your post)
+
+
+
+The dynamic blog system will automatically include your new post in the listing.
+This implementation keeps your website minimal and lightweight while making it much easier to manage blog content. -->
+
+    <!-- --------------------Nav Bar ------------------------------------>
+
+    <div id="header">
+        <nav>
+            <img src="/public/assets/images/profile_logo.jpeg" class="logo">
+            <ul id="sidemenu">
+                <li><a href="/index.html#header">Home</a></li>
+                <li><a href="/index.html#about">About</a></li>
+                <li><a href="/index.html#services">Services</a></li>
+                <li><a href="/index.html#my work">My Work</a></li>
+                <li><a href="/blog.html#blog">Blog</a></li>
+
+                <i class="fas fa-times close-icon" onclick="closemenu()"></i>
+            </ul>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
+        </nav>
+    </div>
+
+    <!-- Blog Content -->
+    <div id="blog">
+        <div class="container">
+            <h1 class="ctitle">Blog</h1>
+            <p>Here, I post thoughts - some structured, some spontaneous, some random. I try to sample and explore
+                ideas/thoughts/stuff that spark curiosity and challenge the status quo.
+                This may range from technology, coding, and everything in between.</p>
+            </p>
+
+
+            <div id="blog-list" class="blog-list">
+                <!-- Blog posts will be loaded here dynamically -->
+                <div class="loading">Loading blog posts...</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div id="copyright">
+            <div class="copyright">
+                <p style="text-align: center;">Copyright &copy;
+                    <script>document.write(new Date().getFullYear())</script> Brian Kibet. All Rights Reserved
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function openmenu() {
+            document.getElementById("sidemenu").style.right = "0";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closemenu() {
+            const menuWidth = window.innerWidth <= 380 ? "-180px" : "-250px";
+            document.getElementById("sidemenu").style.right = menuWidth;
+            document.body.style.overflow = "auto";
+        }
+        // Add event listeners for menu items
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuItems = document.querySelectorAll("#sidemenu li a");
+            menuItems.forEach(item => {
+                item.addEventListener("click", closemenu);
+            });
+
+            // Close menu on window resize if screen becomes larger
+            window.addEventListener("resize", function () {
+                if (window.innerWidth > 768) {
+                    closemenu();
+                }
+            });
+
+            // Load blog posts
+            loadBlogPosts();
+        });
+
+        // Function to load blog posts from JSON file
+        function loadBlogPosts() {
+            fetch('public/blog-posts/posts.json')
+                .then(response => response.json())
+                .then(data => {
+                    displayBlogPosts(data.posts);
+                })
+                .catch(error => {
+                    console.error('Error loading blog posts:', error);
+                    document.querySelector('#blog-list').innerHTML = '<p>Error loading blog posts. Please try again later.</p>';
+                });
+        }
+
+        // Function to display blog posts
+        function displayBlogPosts(posts) {
+            const blogListElement = document.getElementById('blog-list');
+
+            // Clear loading message
+            blogListElement.innerHTML = '';
+
+            if (posts.length === 0) {
+                blogListElement.innerHTML = '<p>No blog posts available yet. Check back soon!</p>';
+                return;
+            }
+
+            // Sort posts by date (newest first)
+            posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            // Create HTML for each post
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'blog-post';
+
+                const postDate = new Date(post.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                postElement.innerHTML = `
+                    <div class="blog-date">${postDate}</div>
+                    <h2 class="blog-title">${post.title}</h2>
+                    <div class="blog-excerpt">
+                        <p>${post.excerpt}</p>
+                    </div>
+                    <a href="blog-post.html?id=${post.id}" class="read-more">Read More</a>
+                `;
+
+                blogListElement.appendChild(postElement);
+            });
+        }
+    </script>
+</body>
+
+</html>

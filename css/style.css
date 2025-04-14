@@ -1,0 +1,696 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family:sans-serif;
+    font-size: 16px;
+    box-sizing: border-box;
+    line-height: 1.4;
+    background-color: #080808;
+    color: #fff;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+.container{
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    
+
+    }
+
+.header-text{
+    margin-top: 0%;
+    font-size: 20px;
+
+}
+h1 {
+    font-size: 34px;
+    font-weight: bold;
+    color: blanchedalmond;
+    padding: 0;
+    margin: 0;
+}
+h2 {
+    font-weight: normal;
+    font-style: italic;
+    color: #999;
+    font-size: 18px;
+    padding: 0;
+    margin: 5px 0 10px 0;
+}
+
+
+/* ------------------Nav bar------------------ */
+/* Container and general layout */
+#header{
+    width: 100%;
+    padding: 10px 5%;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+}
+
+/* Logo styling */
+.logo {
+    width: 100px; /* Increased size from typical 40-50px */
+    height: auto;
+    transition: all 0.3s ease;
+}
+
+/* Navigation menu styling */
+nav ul {
+    display: flex;
+    list-style: none;
+    
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: #e2eced;
+    text-decoration: none;
+    font-size: 18px;
+    position: relative;
+}
+/* Underline effect for menu items */
+nav ul li a::after {
+    content: '';
+    width: 0;
+    height: 3px;
+    background: #ff004f;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: 0.5s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Hide menu icons by default */
+.fas.fa-bars, .fas.fa-times {
+    display: none;
+}
+
+/* Mobile responsive design */
+@media screen and (max-width: 768px) {
+    /* Show menu icon on mobile */
+    .fas.fa-bars {
+        display: block;
+        font-size: 25px;
+        cursor: pointer;
+        color: #fff;
+    }
+    
+    /* Positioning for mobile menu */
+    nav ul {
+        background: #ff004f; /* Example background color */
+        position: fixed;
+        top: 0;
+        right: -250px; /* Starting position off-screen */
+        width: 200px; /* Fixed width to prevent overflow */
+        height: 100vh;
+        padding-top: 50px;
+        z-index: 999; /* Ensure menu appears above other content */
+        transition: right 0.5s ease; /* Smooth transition */
+        flex-direction: column;
+    }
+    
+    nav ul li {
+        display: block;
+        margin: 25px 0 25px 25px;
+    }
+    
+    .fas.fa-times.close-icon {
+        display: block;
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        cursor: pointer;
+        color: #fff;
+    }
+    
+    /* Slightly smaller logo on mobile for better proportions */
+    .logo {
+        width: 60px;
+        margin-top: 5px;
+    }
+}
+
+/* Extra small devices - prevent menu issues */
+@media screen and (max-width: 380px) {
+    nav ul {
+        width: 180px; /* Narrower menu */
+        right: -180px; /* Match starting position to width */
+    }
+    
+    nav ul li {
+        margin: 20px 0 20px 20px; /* Tighter spacing */
+    }
+    
+    /* Adjust logo for very small screens */
+    .logo {
+        width: 55px;
+    }
+    
+    /* Ensure menu text doesn't overflow */
+    nav ul li a {
+        font-size: 16px;
+    }
+}
+
+
+/* -------------------About------------------------- */
+#about{
+    color: #ababab;
+    margin-top: 20px;
+    
+}
+.row{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    
+}
+
+/* Profile image styling */
+
+#profile-image{
+    grid-column: span 6;
+    text-align: right;
+}
+.profile-image-container {
+    margin: 0 auto 15px;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    overflow: hidden;
+    text-align: center;
+}
+.profile{
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 15px;   
+    
+}
+
+#profile img{
+    width: 220px;
+    height: 220px;
+    border-radius: 110px;
+    object-fit: cover;
+    
+}
+@media (max-width: 768px) {
+    #profile-image {
+      grid-column: span 12;
+      text-align: center;
+    }
+    #about-me {
+      grid-column: span 12;
+      padding-top: 20px;
+      text-align: center;
+    }}
+
+/* Text content styling */
+
+#about-me {
+    padding-top: 40px;
+    padding-left: 20px;
+    grid-column: span 6;
+}
+@media (max-width: 768px) {
+    #profile {
+      grid-column: span 12;
+      text-align: center;
+    }
+    #about-me {
+      grid-column: span 12;
+      padding-top: 20px;
+      text-align: center;
+    }
+}
+  
+ /* Social icons styling */
+ .icons {
+    display: inline;
+    justify-content: center;
+    margin: 15px 0;
+    gap: 15px;
+    width: 40px;
+    height: 40px;
+}
+
+.icons a {
+    display: inline;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #333;
+    border-radius: 50%;
+    margin: 0 10px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    transition: transform 0.3s ease, background 0.3s;
+}
+
+.icons a:hover {
+    background: #ff004f;
+    transform: translateY(-5px);
+}
+
+
+
+.label {
+    display: none; /* Hide text labels but keep for accessibility */
+}
+/* Default state: Just plain text */
+.download-text {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    padding: 5px;
+}
+
+/* Hover effect: Transforms into a button */
+.download-text:hover {
+    background-color: #ff004f;
+    color: black;
+    padding: 6px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+
+
+
+hr {
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    padding: 0;
+    margin: 20px 0px 20px 0px;
+    border-top: 1px solid #fff;
+}
+hr {
+    display: block;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    unicode-bidi: isolate;
+    overflow: hidden;
+    border-style: inset;
+    border-width: 1px;
+}
+
+
+
+
+
+
+
+@media screen and (max-width:768px) {
+    .about-content{
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    #profile-image{
+        width: 100%;
+    }
+    .icons__contact{
+        justify-content: center;
+    }
+    
+}    
+
+
+
+
+
+/* ----------------services------------------------- */
+#services{
+    padding: 30px 0;
+}
+
+.services-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px, 1fr));
+    grid-gap: 40px;
+    margin-top: 50px;
+}
+.services-list div{
+    background: #262626;
+    padding: 20px;
+    font-size: 13px;
+    font-weight: 300;
+    border-radius: 10px;
+    transition: background 0.5s,transform 0.5s;
+
+}
+.services-list div i{
+    font-size: 50px;
+    margin-bottom: 30px;
+
+}
+.services-list div h2{
+    font-size: 30px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.services-list div:hover{
+    background: #ff004f;
+    transform: translateY(-10px);
+
+}
+
+/* services intro */
+#services p {
+    color: #fff;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  #services .stack-container {
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+  }
+  
+  #services .stack-item {
+    margin-bottom: 10px;
+    color: #fff;
+  }
+  
+  #services .emoji {
+    font-size: 18px;
+    margin-right: 10px;
+    display: inline-block;
+    width: 25px;
+  }
+  
+  #services .service-intro {
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 15px;
+    font-weight: 500;
+  }
+
+ 
+
+/* ----------------------------------------Work----------------------------- */
+/* ---------Featured writing---------------- */
+.ctitle {
+    font-size: 36px;
+    margin-bottom: 20px;
+    margin-top: 25px;
+    margin-left: 25px;
+    text-align: left;
+}
+.nodot {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+/* -------projects------------- */
+#pet-projects .row {
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+.project {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+.project-pic {
+    float: left;
+    margin-right: 10px;
+}
+.pdesc {
+}
+.pend {
+    clear: both;
+}
+
+.project-pic img {
+    height: 80px;
+    border-radius: 5px;
+    border: 1px solid #999;
+}
+
+/* blog */
+/* Blog Styles */
+
+#blog {
+    padding: 50px 0;
+}
+
+.blog-list {
+    margin-top: 40px;
+}
+
+.blog-post {
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.blog-post:hover {
+    transform: translateY(-5px);
+    background: #262626;
+}
+
+.blog-date {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.blog-title {
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.blog-excerpt {
+    color: #ababab;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.read-more {
+    display: inline-block;
+    color: #ff004f;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+}
+
+.read-more::after {
+    content: '';
+    width: 0;
+    height: 2px;
+    background: #ff004f;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: width 0.3s;
+}
+
+.read-more:hover::after {
+    width: 100%;
+}
+
+/* Individual Blog Post Page Styles */
+.blog-header {
+    margin-bottom: 40px;
+}
+
+.blog-content {
+    color: #ababab;
+    line-height: 1.8;
+}
+
+.blog-content p {
+    margin-bottom: 20px;
+}
+
+.blog-content h2 {
+    color: #fff;
+    margin: 30px 0 15px;
+    font-size: 26px;
+}
+
+.blog-content h3 {
+    color: #fff;
+    margin: 25px 0 12px;
+    font-size: 22px;
+}
+
+.blog-content ul, .blog-content ol {
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.blog-content li {
+    margin-bottom: 8px;
+}
+
+.blog-content img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.blog-content code {
+    background: #262626;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+.blog-content pre {
+    background: #262626;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.back-to-blog {
+    display: inline-block;
+    margin-top: 40px;
+    color: #ff004f;
+    text-decoration: none;
+    transition: transform 0.3s;
+}
+
+.back-to-blog:hover {
+    transform: translateX(-5px);
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: #777;
+}
+
+.stack-container {
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.stack-item {
+    margin-bottom: 10px;
+    color: #ababab;
+}
+
+.emoji {
+    font-size: 18px;
+    margin-right: 10px;
+    display: inline-block;
+    width: 25px;
+}
+
+.service-intro {
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+/* ------------------------------css for small screen--------------------------- */
+nav .fa-solid{
+    display: none;
+}
+
+@media only screen and (max-width:600px){
+    #header{
+         background-image: url(images/overlay.png);
+    }
+    .header-text{
+        margin-top: 0%;
+        font-size: 16px;
+    }
+    .header-text h1{
+        font-size: 30px;
+    }
+    nav .fa-solid{
+        display: block;
+        font-size: 25px;
+    }
+    nav ul{
+        background: #ff004f;
+        position: fixed;
+        top: 0;
+        right: -250px;
+        width: 200px;
+        height: 100vh;
+        padding-top: 50px;
+        z-index: 2;
+        transition: right 0.5s;
+    }
+    nav ul li{
+        display: block;
+        margin: 25px;
+    }
+    nav ul .nav .fa-solid{
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        cursor: pointer;
+    }
+    .sub-title{
+        font-size: 40px;
+    }
+    #profile-image, .about-me{
+        flex-basis: 100%;
+    }
+    #profile-image{
+        margin-bottom: 30px;
+    }
+    .about-me{
+        font-size: 14px;
+    }
+    
+    #copyright{
+        font-size: 14px;       
+        
+    }
+     
+}
+
+ 
