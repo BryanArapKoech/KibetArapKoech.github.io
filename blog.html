@@ -1,3 +1,5 @@
+<!-- blog.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,23 +15,7 @@
 
 <body>
 
-    <!-- To add a new blog post: -->
-
-<!-- Open the posts.json file
-Add a new entry to the "posts" array with:
-
-A unique ID
-Title
-Date
-Excerpt (short summary)
-Content (full HTML content of your post)
-
-
- -->
-
-
     <!-- --------------------Nav Bar ------------------------------------>
-
     <div id="header">
         <nav>
             <img src="/public/assets/images/profile_logo.jpeg" class="logo">
@@ -39,7 +25,6 @@ Content (full HTML content of your post)
                 <li><a href="/index.html#services">Services</a></li>
                 <li><a href="/index.html#my work">My Work</a></li>
                 <li><a href="/blog.html#blog">Blog</a></li>
-
                 <i class="fas fa-times close-icon" onclick="closemenu()"></i>
             </ul>
             <i class="fas fa-bars" onclick="openmenu()"></i>
@@ -51,11 +36,8 @@ Content (full HTML content of your post)
         <div class="container">
             <h1 class="ctitle">Blog</h1>
             <p>Thoughts - some structured, some spontaneous, some random.</p>
-            </p>
-
 
             <div id="blog-list" class="blog-list">
-                <!-- Blog posts will be loaded here dynamically -->
                 <div class="loading">Loading blog posts...</div>
             </div>
         </div>
@@ -72,80 +54,8 @@ Content (full HTML content of your post)
     </footer>
 
     <script>
-        // Add this to your blog.html loadBlogPosts function to debug the issue
-
-function loadBlogPosts() {
-    console.log('Starting to load blog posts...');
-    
-    fetch('public/blog-posts/posts.json')
-        .then(response => {
-            console.log('Fetch response status:', response.status);
-            console.log('Fetch response ok:', response.ok);
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            return response.text(); // Get as text first to inspect
-        })
-        .then(text => {
-            console.log('Raw JSON text length:', text.length);
-            console.log('First 500 characters:', text.substring(0, 500));
-            console.log('Characters around position 3412:', text.substring(3400, 3450));
-            
-            // Try to parse the JSON
-            try {
-                const data = JSON.parse(text);
-                console.log('JSON parsed successfully');
-                console.log('Data structure:', Object.keys(data));
-                console.log('Posts array length:', data.posts ? data.posts.length : 'No posts property');
-                
-                displayBlogPosts(data.posts);
-            } catch (parseError) {
-                console.error('JSON Parse Error:', parseError);
-                console.error('Error at position:', parseError.message.match(/position (\d+)/)?.[1]);
-                throw parseError;
-            }
-        })
-        .catch(error => {
-            console.error('Error loading blog posts:', error);
-            document.querySelector('#blog-list').innerHTML = '<p>Error loading blog posts. Please try again later.</p>';
-        });
-}
-    </script>
-
-    <script>
-        function openmenu() {
-            document.getElementById("sidemenu").style.right = "0";
-            document.body.style.overflow = "hidden";
-        }
-
-        function closemenu() {
-            const menuWidth = window.innerWidth <= 380 ? "-180px" : "-250px";
-            document.getElementById("sidemenu").style.right = menuWidth;
-            document.body.style.overflow = "auto";
-        }
-        // Add event listeners for menu items
-        document.addEventListener("DOMContentLoaded", function () {
-            const menuItems = document.querySelectorAll("#sidemenu li a");
-            menuItems.forEach(item => {
-                item.addEventListener("click", closemenu);
-            });
-
-            // Close menu on window resize if screen becomes larger
-            window.addEventListener("resize", function () {
-                if (window.innerWidth > 768) {
-                    closemenu();
-                }
-            });
-
-            // Load blog posts
-            loadBlogPosts();
-        });
-
-        // Function to load blog posts from JSON file
         function loadBlogPosts() {
-            fetch('public/blog-posts/posts.json')
+            fetch('/public/blog-posts/posts.json')
                 .then(response => response.json())
                 .then(data => {
                     displayBlogPosts(data.posts);
@@ -156,32 +66,22 @@ function loadBlogPosts() {
                 });
         }
 
-        // Function to display blog posts
         function displayBlogPosts(posts) {
             const blogListElement = document.getElementById('blog-list');
-
-            // Clear loading message
             blogListElement.innerHTML = '';
-
-            if (posts.length === 0) {
+            if (!posts || posts.length === 0) {
                 blogListElement.innerHTML = '<p>No blog posts available yet. Check back soon!</p>';
                 return;
             }
-
-            // Sort posts by date (newest first)
             posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-            // Create HTML for each post
             posts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.className = 'blog-post';
-
                 const postDate = new Date(post.date).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric'
                 });
-
                 postElement.innerHTML = `
                     <div class="blog-date">${postDate}</div>
                     <h2 class="blog-title">${post.title}</h2>
@@ -190,11 +90,35 @@ function loadBlogPosts() {
                     </div>
                     <a href="blog-post.html?id=${post.id}" class="read-more">Read More</a>
                 `;
-
                 blogListElement.appendChild(postElement);
             });
         }
+
+        function openmenu() {
+            document.getElementById("sidemenu").style.right = "0";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closemenu() {
+            const menuWidth = window.innerWidth <= 380 ? "-180px" : "-250px";
+            document.getElementById("sidemenu").style.right = menuWidth;
+            document.body.style.overflow = "auto";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuItems = document.querySelectorAll("#sidemenu li a");
+            menuItems.forEach(item => {
+                item.addEventListener("click", closemenu);
+            });
+            window.addEventListener("resize", function () {
+                if (window.innerWidth > 768) {
+                    closemenu();
+                }
+            });
+            loadBlogPosts();
+        });
     </script>
+
 </body>
 
 </html>
