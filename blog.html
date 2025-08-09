@@ -53,71 +53,109 @@
         </div>
     </footer>
 
-    <script>
-        function loadBlogPosts() {
-            fetch('/public/blog-posts/posts.json')
-                .then(response => response.json())
-                .then(data => {
-                    displayBlogPosts(data.posts);
-                })
-                .catch(error => {
-                    console.error('Error loading blog posts:', error);
-                    document.querySelector('#blog-list').innerHTML = '<p>Error loading blog posts. Please try again later.</p>';
-                });
-        }
+    
+<script>
+    function loadBlogPosts() {
+        console.group('Loading Blog Posts');
+        console.time('Fetch Duration');
 
-        function displayBlogPosts(posts) {
-            const blogListElement = document.getElementById('blog-list');
-            blogListElement.innerHTML = '';
-            if (!posts || posts.length === 0) {
-                blogListElement.innerHTML = '<p>No blog posts available yet. Check back soon!</p>';
-                return;
-            }
-            posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-            posts.forEach(post => {
-                const postElement = document.createElement('div');
-                postElement.className = 'blog-post';
-                const postDate = new Date(post.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-                postElement.innerHTML = `
-                    <div class="blog-date">${postDate}</div>
-                    <h2 class="blog-title">${post.title}</h2>
-                    <div class="blog-excerpt">
-                        <p>${post.excerpt}</p>
-                    </div>
-                    <a href="blog-post.html?id=${post.id}" class="read-more">Read More</a>
-                `;
-                blogListElement.appendChild(postElement);
-            });
-        }
-
-        function openmenu() {
-            document.getElementById("sidemenu").style.right = "0";
-            document.body.style.overflow = "hidden";
-        }
-
-        function closemenu() {
-            const menuWidth = window.innerWidth <= 380 ? "-180px" : "-250px";
-            document.getElementById("sidemenu").style.right = menuWidth;
-            document.body.style.overflow = "auto";
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const menuItems = document.querySelectorAll("#sidemenu li a");
-            menuItems.forEach(item => {
-                item.addEventListener("click", closemenu);
-            });
-            window.addEventListener("resize", function () {
-                if (window.innerWidth > 768) {
-                    closemenu();
+        fetch('/public/blog-posts/posts.json', { signal: AbortSignal.timeout(5000) })
+            .then(response => {
+                console.log('Fetch Response Status:', response.status);
+                console.log('Response OK:', response.ok);
+                console.log('Response Headers:', Object.fromEntries(response.headers));
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
                 }
+                return response.text(); // Get text first for debugging
+            })
+            .then(text => {
+                console.log('Raw Response Text Length:', text.length);
+                console.log('First 200 Characters:', text.substring(0, 200));
+                try {
+                    const data = JSON.parse(text);
+                    console.log('JSON Parsed Successfully');
+                    console.log('Data Structure:', Object.keys(data));
+                    console.log('Posts Array Length:', data.posts ? data.posts.length : 'No posts property');
+                    displayBlogPosts(data.posts);
+                } catch (parseError) {
+                    console.error('JSON Parse Error:', parseError.message);
+                    console.error('Error Position:', parseError.message.match(/position (\d+)/)?.[1]);
+                    console.error('Context Around Error:', text.substring(Math.max(0, parseError.position - 20), parseError.position + 20));
+                    throw parseError;
+                }
+            })
+            .catch(error => {
+                console.error('Fetch or Processing Error:', error.message);
+                if (error.name === 'AbortError') {
+                    console.warn('Fetch aborted due to timeout (5 seconds)');
+                } else if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+                    console.warn('Network error or CORS issue detected');
+                }
+                document.querySelector('#blog-list').innerHTML = '<p>Failed to load blog posts. Check your internet connection or try again later. See console for details.</p>';
+            })
+            .finally(() => {
+                console.timeEnd('Fetch Duration');
+                console.groupEnd();
             });
-            loadBlogPosts();
+    }
+
+    function displayBlogPosts(posts) {
+        const blogListElement = document.getElementById('blog-list');
+        blogListElement.innerHTML = '';
+        if (!posts || posts.length === 0) {
+            blogListElement.innerHTML = '<p>No blog posts available yet. Check back soon!</p>';
+            return;
+        }
+        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+        posts.forEach(post => {
+            const postElement = document.createElement('div');
+            postElement.className = 'blog-post';
+            const postDate = new Date(post.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            postElement.innerHTML = `
+                <div class="blog-date">${postDate}</div>
+                <h2 class="blog-title">${post.title}</h2>
+                <div class="blog-excerpt">
+                    <p>${post.excerpt}</p>
+                </div>
+                <a href="blog-post.html?id=${post.id}" class="read-more">Read More</a>
+            `;
+            blogListElement.appendChild(postElement);
         });
-    </script>
+    }
+
+    function openmenu() {
+        document.getElementById("sidemenu").style.right = "0";
+        document.body.style.overflow = "hidden";
+    }
+
+    function closemenu() {
+        const menuWidth = window.innerWidth <= 380 ? "-180px" : "-250px";
+        document.getElementById("sidemenu").style.right = menuWidth;
+        document.body.style.overflow = "auto";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuItems = document.querySelectorAll("#sidemenu li a");
+        menuItems.forEach(item => {
+            item.addEventListener("click", closemenu);
+        });
+        document.querySelector(".fas.fa-bars").addEventListener("click", openmenu);
+        document.querySelector(".fas.fa-times").addEventListener("click", closemenu);
+        window.addEventListener("resize", function () {
+            if (window.innerWidth > 768) {
+                closemenu();
+            }
+        });
+        loadBlogPosts();
+    });
+</script>
+
+
 
 </body>
 
