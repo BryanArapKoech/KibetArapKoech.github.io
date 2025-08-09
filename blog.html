@@ -59,7 +59,7 @@
         console.group('Loading Blog Posts');
         console.time('Fetch Duration');
 
-        fetch('./public/blog-posts/posts.json', { signal: AbortSignal.timeout(5000) })
+        fetch('/public/blog-posts/posts.json', { signal: AbortSignal.timeout(5000) })
             .then(response => {
                 console.log('Fetch Response Status:', response.status);
                 console.log('Response OK:', response.ok);
