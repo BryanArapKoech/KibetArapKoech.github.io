@@ -12,9 +12,10 @@
 </head>
 
 <body>
-    <!-- 5. To add a new blog post:
 
-Open the posts.json file
+    <!-- To add a new blog post: -->
+
+<!-- Open the posts.json file
 Add a new entry to the "posts" array with:
 
 A unique ID
@@ -24,8 +25,8 @@ Excerpt (short summary)
 Content (full HTML content of your post)
 
 
-
  -->
+
 
     <!-- --------------------Nav Bar ------------------------------------>
 
@@ -49,9 +50,7 @@ Content (full HTML content of your post)
     <div id="blog">
         <div class="container">
             <h1 class="ctitle">Blog</h1>
-            <p>Here, I post thoughts - some structured, some spontaneous, some random. I try to sample and explore
-                ideas/thoughts/stuff that spark curiosity and challenge the status quo.
-                This may range from technology, coding, and everything in between.</p>
+            <p>Thoughts - some structured, some spontaneous, some random.</p>
             </p>
 
 
@@ -71,6 +70,49 @@ Content (full HTML content of your post)
             </div>
         </div>
     </footer>
+
+    <script>
+        // Add this to your blog.html loadBlogPosts function to debug the issue
+
+function loadBlogPosts() {
+    console.log('Starting to load blog posts...');
+    
+    fetch('public/blog-posts/posts.json')
+        .then(response => {
+            console.log('Fetch response status:', response.status);
+            console.log('Fetch response ok:', response.ok);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            return response.text(); // Get as text first to inspect
+        })
+        .then(text => {
+            console.log('Raw JSON text length:', text.length);
+            console.log('First 500 characters:', text.substring(0, 500));
+            console.log('Characters around position 3412:', text.substring(3400, 3450));
+            
+            // Try to parse the JSON
+            try {
+                const data = JSON.parse(text);
+                console.log('JSON parsed successfully');
+                console.log('Data structure:', Object.keys(data));
+                console.log('Posts array length:', data.posts ? data.posts.length : 'No posts property');
+                
+                displayBlogPosts(data.posts);
+            } catch (parseError) {
+                console.error('JSON Parse Error:', parseError);
+                console.error('Error at position:', parseError.message.match(/position (\d+)/)?.[1]);
+                throw parseError;
+            }
+        })
+        .catch(error => {
+            console.error('Error loading blog posts:', error);
+            document.querySelector('#blog-list').innerHTML = '<p>Error loading blog posts. Please try again later.</p>';
+        });
+}
+    </script>
 
     <script>
         function openmenu() {
