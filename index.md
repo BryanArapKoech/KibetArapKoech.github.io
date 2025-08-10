@@ -127,13 +127,13 @@ title: Brian Kibet
 
 <br><br><br><br><br><br><br><br><br><br><br>
 
-<footer>
+<!-- <footer>
     <div id="copyright">
         <div class="copyright">
             <p style="text-align: center;">Copyright &copy; {{ site.time | date: '%Y' }} Brian Kibet. All Rights Reserved</p>
         </div>
     </div>
-</footer>
+</footer> -->
 
 <script>
     function openmenu() {
