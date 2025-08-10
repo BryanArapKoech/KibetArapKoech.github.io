@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Strength of Being Misunderstood - Brian Kibet</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://kit.fontawesome.com/56bf1872c9.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header">
+        <nav>
+            <img src="/public/assets/images/profile_logo.jpeg" class="logo">
+            <ul id="sidemenu">
+                <li><a href="/#header">Home</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#my work">My Work</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <i class="fas fa-times close-icon" onclick="closemenu()"></i>
+            </ul>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
+        </nav>
+    </div>
+
+    <div id="blog">
+        <div class="container">
+            <div id="blog-content">
+                <h1>The Strength of Being Misunderstood</h1>
+                <p>Published on: 09 Aug 2025</p>
+                <p>Almost everyone cares what someone thinks (though caring what everyone thinks is definitely a mistake), and it’s probably important. Caring too much makes you a sheep. But you need to be at least a little in tune with others to do something useful for them. It seems like there are two degrees of freedom: you can choose the people whose opinions you care about (and on what subjects), and you can choose the timescale you care about them on. Most people figure out the former [1] but the latter doesn’t seem to get much attention.
+The most impressive people I know care a lot about what people think, even people whose opinions they really shouldn’t value (a surprising numbers of them do something like keeping a folder of screenshots of tweets from haters). But what makes them unusual is that they generally care about other people’s opinions on a very long time horizon—as long as the history books get it right, they take some pride in letting the newspapers get it wrong.
+You should trade being short-term low-status for being long-term high-status, which most people seem unwilling to do. A common way this happens is by eventually being right about an important but deeply non-consensus bet. But there are lots of other ways–the key observation is that as long as you are right, being misunderstood by most people is a strength not a weakness. You and a small group of rebels get the space to solve an important problem that might otherwise not get solved.</p>
+
+<p><a href="https://blog.samaltman.com/the-strength-of-being-misunderstood" target="_blank" rel="noopener noreferrer">Sam Altman</a></p>
+
+            </div>
+            <a href="/blog" class="back-to-blog">&larr; Back to Blog</a>
+        </div>
+    </div>
+
+    <footer>
+        <div id="copyright">
+            <div class="copyright">
+                <p style="text-align: center;">Copyright &copy; 2025 Brian Kibet. All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function openmenu() { document.getElementById("sidemenu").style.right = "0"; }
+        function closemenu() { document.getElementById("sidemenu").style.right = "-200px"; }
+    </script>
+</body>
+</html>

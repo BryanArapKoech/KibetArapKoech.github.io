@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyond Smart - Brian Kibet</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://kit.fontawesome.com/56bf1872c9.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header">
+        <nav>
+            <img src="/public/assets/images/profile_logo.jpeg" class="logo">
+            <ul id="sidemenu">
+                <li><a href="/#header">Home</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#my work">My Work</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <i class="fas fa-times close-icon" onclick="closemenu()"></i>
+            </ul>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
+        </nav>
+    </div>
+
+    <div id="blog">
+        <div class="container">
+            <div id="blog-content">
+                <h1>Beyond Smart</h1>
+                <p>Published on: 09 Aug 2025</p>
+                <p>If you asked people what was special about Einstein, most would say that he was really smart. Even the ones who tried to give you a more sophisticated-sounding answer would probably think this first. Till a few years ago I would have given the same answer myself. But that wasn’t what was special about Einstein. What was special about him was that he had important new ideas. Being very smart was a necessary precondition for having those ideas, but the two are not identical. It may seem a hair-splitting distinction to point out that intelligence and its consequences are not identical, but it isn’t. There’s a big gap between them. Anyone who’s spent time around universities and research labs knows how big. There are a lot of genuinely smart people who don’t achieve very much.
+I grew up thinking that being smart was the thing most to be desired. Perhaps you did too. But I bet it’s not what you really want. Imagine you had a choice between being really smart but discovering nothing new, and being less smart but discovering lots of new ideas. Surely you’d take the latter. I would. The choice makes me uncomfortable, but when you see the two options laid out explicitly like that, it’s obvious which is better.
+The reason the choice makes me uncomfortable is that being smart still feels like the thing that matters, even though I know intellectually that it isn’t. I spent so many years thinking it was. The circumstances of childhood are a perfect storm for fostering this illusion. Intelligence is much easier to measure than the value of new ideas, and you’re constantly being judged by it. Whereas even the kids who will ultimately discover new things aren’t usually discovering them yet. For kids that way inclined, intelligence is the only game in town.
+There are more subtle reasons too, which persist long into adulthood. Intelligence wins in conversation, and thus becomes the basis of the dominance hierarchy. [1] Plus having new ideas is such a new thing historically, and even now done by so few people, that society hasn’t yet assimilated the fact that this is the actual destination, and intelligence merely a means to an end. [2]
+Why do so many smart people fail to discover anything new? Viewed from that direction, the question seems a rather depressing one. But there’s another way to look at it that’s not just more optimistic, but more interesting as well. Clearly intelligence is not the only ingredient in having new ideas. What are the other ingredients? Are they things we could cultivate?</p>
+
+<p><a href="https://www.paulgraham.com/smart.html\" target="_blank\" rel="noopener noreferrer">Paul Graham</a></p>
+
+            </div>
+            <a href="/blog" class="back-to-blog">&larr; Back to Blog</a>
+        </div>
+    </div>
+
+    <footer>
+        <div id="copyright">
+            <div class="copyright">
+                <p style="text-align: center;">Copyright &copy; 2025 Brian Kibet. All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function openmenu() { document.getElementById("sidemenu").style.right = "0"; }
+        function closemenu() { document.getElementById("sidemenu").style.right = "-200px"; }
+    </script>
+</body>
+</html>

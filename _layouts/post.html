@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - Brian Kibet</title>
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/style.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://kit.fontawesome.com/56bf1872c9.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header">
+        <nav>
+            <img src="{{ site.baseurl }}/public/assets/images/profile_logo.jpeg" class="logo">
+            <ul id="sidemenu">
+                <li><a href="{{ site.baseurl }}/#header">Home</a></li>
+                <li><a href="{{ site.baseurl }}/#about">About</a></li>
+                <li><a href="{{ site.baseurl }}/#services">Services</a></li>
+                <li><a href="{{ site.baseurl }}/#my work">My Work</a></li>
+                <li><a href="{{ site.baseurl }}/blog">Blog</a></li>
+                <i class="fas fa-times close-icon" onclick="closemenu()"></i>
+            </ul>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
+        </nav>
+    </div>
+
+    <div id="blog">
+        <div class="container">
+            <div id="blog-content">
+                <h1>{{ page.title }}</h1>
+                <p>Published on: {{ page.date | date_to_string }}</p>
+                {{ content }}
+            </div>
+            <a href="{{ site.baseurl }}/blog" class="back-to-blog">&larr; Back to Blog</a>
+        </div>
+    </div>
+
+    <footer>
+        <div id="copyright">
+            <div class="copyright">
+                <p style="text-align: center;">Copyright &copy; {{ site.time | date: '%Y' }} Brian Kibet. All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function openmenu() { document.getElementById("sidemenu").style.right = "0"; }
+        function closemenu() { document.getElementById("sidemenu").style.right = "-200px"; }
+    </script>
+</body>
+</html>

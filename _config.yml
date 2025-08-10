@@ -1,0 +1,32 @@
+title: Brian Kibet Portfolio
+email: bryankibet77@gmail.com
+description: >-
+  A portfolio showcasing my work, skills, and thoughts - some structured, some spontaneous, some random.
+baseurl: "/KibetArapKoech.github.io"
+url: "https://bryanarapkoech.github.io"
+twitter_username: Kibet_ArapKoech
+github_username: BryanArapKoech
+
+permalink: pretty # Use /path/ format
+defaults:
+  - scope:
+      path: "" # Applies to all files, including root index.md
+    values:
+      permalink: /:path/
+  - scope:
+      path: "blog" # Ensures /blog/ for the blog index
+    values:
+      permalink: /blog/
+  - scope:
+      path: "posts" # Ensures /posts/title for collection posts
+    values:
+      permalink: /:collection/:title
+
+theme: minima
+plugins:
+  - jekyll-feed
+
+collections:
+  posts:
+    output: true
+    permalink: /:collection/:title
