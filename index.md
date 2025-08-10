@@ -142,10 +142,11 @@ title: Brian Kibet
     }
 
     function closemenu() {
-        const menuWidth = window.innerWidth <= 380 ? "-180px" : "-250px";
-        document.getElementById("sidemenu").style.right = menuWidth;
-        document.body.style.overflow = "auto";
+    // -100% to ensure complete hiding regardless of menu width
+    document.getElementById("sidemenu").style.right = "-100%";
+    document.body.style.overflow = "auto";
     }
+
     // Add event listeners for menu items
     document.addEventListener("DOMContentLoaded", function () {
         const menuItems = document.querySelectorAll("#sidemenu li a");
