@@ -1,0 +1,24 @@
+<script>
+    function openmenu() {
+        console.log("Opening menu");
+        document.getElementById("sidemenu").style.right = "0";
+        document.body.style.overflow = "hidden";
+    }
+    function closemenu() {
+    // -100% to ensure complete hiding regardless of menu width
+    document.getElementById("sidemenu").style.right = "-100%";
+    document.body.style.overflow = "auto";
+       }
+       
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuItems = document.querySelectorAll("#sidemenu li a");
+        menuItems.forEach(item => {
+            item.addEventListener("click", closemenu);
+        });
+        window.addEventListener("resize", function () {
+            if (window.innerWidth > 768) {
+                closemenu();
+            }
+        });
+    });
+</script>

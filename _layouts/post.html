@@ -10,20 +10,7 @@
     <script src="https://kit.fontawesome.com/56bf1872c9.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="header">
-        <nav>
-            <img src="{{ site.baseurl }}/public/assets/images/profile_logo.jpeg" class="logo">
-            <ul id="sidemenu">
-                <li><a href="{{ site.baseurl }}/#header">Home</a></li>
-                <li><a href="{{ site.baseurl }}/#about">About</a></li>
-                <li><a href="{{ site.baseurl }}/#services">Services</a></li>
-                <li><a href="{{ site.baseurl }}/#my work">My Work</a></li>
-                <li><a href="{{ site.baseurl }}/blog">Blog</a></li>
-                <i class="fas fa-times close-icon" onclick="closemenu()"></i>
-            </ul>
-            <i class="fas fa-bars" onclick="openmenu()"></i>
-        </nav>
-    </div>
+    {% include nav.html %}
 
     <div id="blog">
         <div class="container">
@@ -36,17 +23,8 @@
         </div>
     </div>
 
-    <footer>
-        <div id="copyright">
-            <div class="copyright">
-                <p style="text-align: center;">Copyright &copy; {{ site.time | date: '%Y' }} Brian Kibet. All Rights Reserved</p>
-            </div>
-        </div>
-    </footer>
+    {% include footer.html %}
 
-    <script>
-        function openmenu() { document.getElementById("sidemenu").style.right = "0"; }
-        function closemenu() { document.getElementById("sidemenu").style.right = "-100%"; }
-    </script>
+    {% include menu-script.html %}
 </body>
 </html>

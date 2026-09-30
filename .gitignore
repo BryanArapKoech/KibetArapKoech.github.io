@@ -7,4 +7,7 @@ Thumbs.db
 #ignore temporary files
 *.tmp
 *.swp
-*.swo
+*.swo# Jekyll build output
+_site/
+.jekyll-cache/
+.sass-cache/

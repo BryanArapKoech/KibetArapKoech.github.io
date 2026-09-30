@@ -3,22 +3,6 @@ layout: default
 title: Brian Kibet
 ---
 
-<!-- --------------------Nav Bar ------------------------------------>
-<!-- <div id="header">
-    <nav>
-        <img src="{{ site.baseurl }}/public/assets/images/profile_logo.jpeg" class="logo">
-        <ul id="sidemenu">
-            <li><a href="{{ site.baseurl }}/#header">Home</a></li>
-            <li><a href="{{ site.baseurl }}/#about">About</a></li>
-            <li><a href="{{ site.baseurl }}/#services">Services</a></li>
-            <li><a href="{{ site.baseurl }}/#my work">My Work</a></li>
-            <li><a href="{{ site.baseurl }}/blog">Blog</a></li>
-            <i class="fas fa-times close-icon" onclick="closemenu()"></i>
-        </ul>
-        <i class="fas fa-bars" onclick="openmenu()"></i>
-    </nav>
-</div> -->
-
 <!----------------------about----------------------------------- -->
 <div id="about" class="container">
     <div class="row">
@@ -125,40 +109,3 @@ title: Brian Kibet
     <p>Zero frameworks were used to make this website to avoid a <a href="https://motherfuckingwebsite.com/" target="_blank" rel="noopener noreferrer">500-pound website</a>. This one is just pure HTML and CSS in two static files.</p>
 </div>
 
-<br><br><br><br><br><br><br><br><br><br><br>
-
-<!-- <footer>
-    <div id="copyright">
-        <div class="copyright">
-            <p style="text-align: center;">Copyright &copy; {{ site.time | date: '%Y' }} Brian Kibet. All Rights Reserved</p>
-        </div>
-    </div>
-</footer> -->
-
-<script>
-    function openmenu() {
-        document.getElementById("sidemenu").style.right = "0";
-        document.body.style.overflow = "hidden";
-    }
-
-    function closemenu() {
-    // -100% to ensure complete hiding regardless of menu width
-    document.getElementById("sidemenu").style.right = "-100%";
-    document.body.style.overflow = "auto";
-    }
-
-    // Add event listeners for menu items
-    document.addEventListener("DOMContentLoaded", function () {
-        const menuItems = document.querySelectorAll("#sidemenu li a");
-        menuItems.forEach(item => {
-            item.addEventListener("click", closemenu);
-        });
-
-        // Close menu on window resize if screen becomes larger
-        window.addEventListener("resize", function () {
-            if (window.innerWidth > 768) {
-                closemenu();
-            }
-        });
-    });
-</script>
