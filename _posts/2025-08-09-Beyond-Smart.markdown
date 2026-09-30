@@ -12,4 +12,4 @@ The reason the choice makes me uncomfortable is that being smart still feels lik
 There are more subtle reasons too, which persist long into adulthood. Intelligence wins in conversation, and thus becomes the basis of the dominance hierarchy. [1] Plus having new ideas is such a new thing historically, and even now done by so few people, that society hasn't yet assimilated the fact that this is the actual destination, and intelligence merely a means to an end. [2]
 Why do so many smart people fail to discover anything new? Viewed from that direction, the question seems a rather depressing one. But there's another way to look at it that's not just more optimistic, but more interesting as well. Clearly intelligence is not the only ingredient in having new ideas. What are the other ingredients? Are they things we could cultivate?
 
-<a href="https://www.paulgraham.com/smart.html\" target="_blank\" rel="noopener noreferrer">Paul Graham</a>
+<a href="https://www.paulgraham.com/smart.html" target="_blank" rel="noopener noreferrer">Paul Graham</a>
